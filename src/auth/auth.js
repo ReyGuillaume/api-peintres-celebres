@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const privateKey = require('../auth/private_key')
+const privateKey = require('./private_key')
 
 module.exports = (req, res, next) => {
   const authorizationHeader = req.headers.authorization
@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
     return res.status(401).json({ message })
   }
 
-  const token = authorizationHeader.
+  const token = authorizationHeader
   jwt.verify(token, privateKey, (error, decodedToken) => {
     if (error) {
       const message = "L'utilisateur n'est pas autorisé à accéder à cette ressource."

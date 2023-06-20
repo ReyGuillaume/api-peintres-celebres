@@ -8,9 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: {
-        msg: "Quelqu'un utilise déjà cet identifiant.",
-      },
+      unique: { msg: "Quelqu'un utilise déjà cet identifiant." },
     },
     password: {
       type: DataTypes.STRING,

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define(
-    'Artist',
+    'Artwork',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -22,6 +22,21 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: { msg: "L'url ne dois pas être vide." },
           notNull: { msg: "L'url est requise." },
+        },
+      },
+      date: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: 'La date ne dois pas être vide.' },
+          notNull: { msg: 'La date est requise.' },
+        },
+      },
+      idArtist: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "L'id de l'artiste est requis." },
         },
       },
     },

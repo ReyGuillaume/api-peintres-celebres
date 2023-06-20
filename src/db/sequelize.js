@@ -1,5 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize')
 const UserModel = require('../models/user')
+const ArtistModel = require('../models/artist')
+const ArtworkModel = require('../models/artwork')
 const bcrypt = require('bcrypt')
 
 const sequelize = new Sequelize('artistes', 'root', 'root', {
@@ -12,19 +14,19 @@ const sequelize = new Sequelize('artistes', 'root', 'root', {
 })
 
 const User = UserModel(sequelize, DataTypes)
+const Artist = ArtistModel(sequelize, DataTypes)
+const Artwork = ArtworkModel(sequelize, DataTypes)
 
-const initDb = () => {
-  return sequelize.sync({ force: true }).then(_ => {
-    bcrypt
-      .hash('guigui', 10)
-      .then(hash => User.create({ username: 'guigui', password: hash }))
-      .then(user => console.log(user.toJSON()))
+Artist.hasMany(Artwork, {
+  foreignKey: 'idArtist'
+});
+Artwork.belongsTo(Artist);
 
-    console.log('La base de donnée "artistes" a bien été synchronisée.')
-  })
-}
+const initDb = () => sequelize.sync().then(_ => console.log('La base de donnée "artistes" a bien été synchronisée.'))
 
 module.exports = {
   initDb,
   User,
+  Artist,
+  Artwork,
 }
