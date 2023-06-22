@@ -20,8 +20,7 @@ module.exports = app => {
             return res.status(401).json({ message })
           }
 
-          // JWT
-          const token = jwt.sign({ uerId: user.id }, privateKey, { expiresIn: '24h' })
+          const token = jwt.sign({ userId: user.id }, privateKey, { expiresIn: '24h' })
 
           const message = "L'utilisateur a été connécté avec succès."
           return res.json({ message, data: user, token })
